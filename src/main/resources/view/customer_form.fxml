@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.customer.controller.CustomerFormController">
+   <children>
+      <Label layoutX="285.0" layoutY="38.0" text="Customer Management">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtID" layoutX="95.0" layoutY="105.0" prefHeight="38.0" prefWidth="251.0" promptText="User ID" />
+      <TextField fx:id="txtTele" layoutX="561.0" layoutY="187.0" prefHeight="38.0" prefWidth="251.0" promptText="Telephone" />
+      <TextField fx:id="txtName" layoutX="561.0" layoutY="105.0" prefHeight="38.0" prefWidth="251.0" promptText="Name" />
+      <TextField fx:id="txtAddress" layoutX="95.0" layoutY="187.0" prefHeight="38.0" prefWidth="251.0" promptText="Address" />
+      <JFXButton buttonType="RAISED" layoutX="95.0" layoutY="250.0" onAction="#btnSaveOnAction" prefHeight="38.0" prefWidth="86.0" style="-fx-background-color: #1abc9c;" text="Save">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <TableView fx:id="tblCustomer" layoutX="95.0" layoutY="308.0" prefHeight="266.0" prefWidth="713.0">
+        <columns>
+          <TableColumn fx:id="colID" prefWidth="144.80001068115234" text="ID" />
+          <TableColumn fx:id="colName" prefWidth="205.5999755859375" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="168.00003051757812" text="Address" />
+            <TableColumn fx:id="colTele" minWidth="0.0" prefWidth="198.39996337890625" text="Telephone" />
+        </columns>
+      </TableView>
+      <JFXButton buttonType="RAISED" layoutX="259.0" layoutY="250.0" onAction="#btnDeleteOnAction" prefHeight="38.0" prefWidth="86.0" style="-fx-background-color: #e74c3c;" text="Delete">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="558.0" layoutY="250.0" onAction="#btnUpdateOnAction" prefHeight="38.0" prefWidth="86.0" style="-fx-background-color: #9b59b6;" text="Update">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="722.0" layoutY="250.0" onAction="#btnSearchOnAction" prefHeight="38.0" prefWidth="86.0" style="-fx-background-color: #2c3e50;" text="Search" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <JFXComboBox fx:id="cmbCustomersIds" layoutX="659.0" layoutY="41.0" onAction="#cmbLoadCustomerIds" prefHeight="24.0" prefWidth="154.0" />
+   </children>
+</AnchorPane>
