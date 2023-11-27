@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -17,21 +16,22 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <TextField fx:id="txtID" layoutX="95.0" layoutY="105.0" prefHeight="38.0" prefWidth="251.0" promptText="User ID" />
-      <TextField fx:id="txtTele" layoutX="561.0" layoutY="187.0" prefHeight="38.0" prefWidth="251.0" promptText="Telephone" />
-      <TextField fx:id="txtName" layoutX="561.0" layoutY="105.0" prefHeight="38.0" prefWidth="251.0" promptText="Name" />
-      <TextField fx:id="txtAddress" layoutX="95.0" layoutY="187.0" prefHeight="38.0" prefWidth="251.0" promptText="Address" />
+      <TextField fx:id="txtID" layoutX="33.0" layoutY="85.0" prefHeight="38.0" prefWidth="251.0" promptText="User ID" />
+      <TextField fx:id="txtTele" layoutX="623.0" layoutY="187.0" prefHeight="38.0" prefWidth="251.0" promptText="Telephone" />
+      <TextField fx:id="txtName" layoutX="623.0" layoutY="85.0" prefHeight="38.0" prefWidth="251.0" promptText="Name" />
+      <TextField fx:id="txtAddress" layoutX="33.0" layoutY="187.0" prefHeight="38.0" prefWidth="251.0" promptText="Address" />
       <JFXButton buttonType="RAISED" layoutX="95.0" layoutY="250.0" onAction="#btnSaveOnAction" prefHeight="38.0" prefWidth="86.0" style="-fx-background-color: #1abc9c;" text="Save">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <TableView fx:id="tblCustomer" layoutX="95.0" layoutY="308.0" prefHeight="266.0" prefWidth="713.0">
+      <TableView fx:id="tblCustomer" layoutX="34.0" layoutY="308.0" prefHeight="266.0" prefWidth="837.0">
         <columns>
-          <TableColumn fx:id="colID" prefWidth="144.80001068115234" text="ID" />
-          <TableColumn fx:id="colName" prefWidth="205.5999755859375" text="Name" />
-            <TableColumn fx:id="colAddress" prefWidth="168.00003051757812" text="Address" />
-            <TableColumn fx:id="colTele" minWidth="0.0" prefWidth="198.39996337890625" text="Telephone" />
+          <TableColumn fx:id="colID" prefWidth="109.5999984741211" text="ID" />
+          <TableColumn fx:id="colName" prefWidth="150.4000244140625" text="Name" />
+            <TableColumn fx:id="colAddress" prefWidth="155.99993896484375" text="Address" />
+            <TableColumn fx:id="colTele" minWidth="0.0" prefWidth="144.79995727539062" text="Telephone" />
+            <TableColumn fx:id="colEmail" minWidth="0.0" prefWidth="277.60003662109375" text="E-mail" />
         </columns>
       </TableView>
       <JFXButton buttonType="RAISED" layoutX="259.0" layoutY="250.0" onAction="#btnDeleteOnAction" prefHeight="38.0" prefWidth="86.0" style="-fx-background-color: #e74c3c;" text="Delete">
@@ -49,6 +49,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXComboBox fx:id="cmbCustomersIds" layoutX="659.0" layoutY="41.0" onAction="#cmbLoadCustomerIds" prefHeight="24.0" prefWidth="154.0" />
+      <TextField fx:id="txtEmail" layoutX="326.0" layoutY="187.0" prefHeight="38.0" prefWidth="251.0" promptText="E-mail" />
    </children>
 </AnchorPane>

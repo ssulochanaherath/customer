@@ -13,8 +13,12 @@ import lk.ijse.customer.dto.CustomerDto;
 import lk.ijse.customer.dto.tm.CustomerTm;
 import lk.ijse.customer.model.CustomerModel;
 
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 public class CustomerFormController {
     public TextField txtID;
@@ -28,16 +32,13 @@ public class CustomerFormController {
     public TableColumn colTele;
     public JFXComboBox<String> comboBox;
     public JFXComboBox<String> cmbCustomersIds;
+    public TextField txtEmail;
+    public TableColumn colEmail;
     private CustomerModel cusModel = new CustomerModel();
 
     public void initialize() {
-        setCellValueFctory();
+        setCellValueFctory();    // Set cell value factory
         loadAllCustomer();
-        try {
-            cmbLoadCustomerIds(null); // Pass a dummy ActionEvent or adjust your method to not require an event
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     private void loadAllCustomer() {
@@ -54,7 +55,8 @@ public class CustomerFormController {
                                 dto.getId(),
                                 dto.getName(),
                                 dto.getAddress(),
-                                dto.getTele()
+                                dto.getTele(),
+                                dto.getEmail()
                         )
                 );
             }
@@ -70,6 +72,7 @@ public class CustomerFormController {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         colTele.setCellValueFactory(new PropertyValueFactory<>("tele"));
+        colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
     }
 
     public void btnSaveOnAction(ActionEvent event) {
@@ -77,13 +80,16 @@ public class CustomerFormController {
         String name = txtName.getText();
         String address = txtAddress.getText();
         String tele = txtTele.getText();
+        String email = txtEmail.getText();
 
-        var dto = new CustomerDto(id, name, address, tele);
+        var dto = new CustomerDto(id, name, address, tele, email);
 
         try {
             boolean isSaved =  cusModel.saveCustomer(dto);
 
             if (isSaved) {
+                sendEmail(email, "Customer Saved!", "Thank you for being our customer. Your details have been saved successfully.");
+
                 new Alert(Alert.AlertType.CONFIRMATION,"Customer Saved!").show();
                 clearFields();
             }
@@ -93,11 +99,46 @@ public class CustomerFormController {
         initialize();
     }
 
+    private void sendEmail(String to, String subject, String content) {
+        final String username = "hallwembley@gmail.com"; // Replace with your Gmail username
+        final String password = "nopvwkcbxpxhvjji"; // Replace with your Gmail password
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        Session session = Session.getInstance(props,
+                new javax.mail.Authenticator() {
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
+
+        try {
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setText(content);
+
+            Transport.send(message);
+
+            System.out.println("Email sent successfully!");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
     private void clearFields() {
         txtID.setText("");
         txtName.setText("");
         txtAddress.setText("");
         txtTele.setText("");
+        txtEmail.setText("");
     }
 
     public void btnDeleteOnAction(ActionEvent event) {
@@ -121,8 +162,9 @@ public class CustomerFormController {
         String name = txtName.getText();
         String address = txtAddress.getText();
         String tel = txtTele.getText();
+        String email = txtEmail.getText();
 
-        var dto = new CustomerDto(id, name, address, tel);
+        var dto = new CustomerDto(id, name, address, tel, email);
 
 //        var model = new CustomerModel();
         try {
@@ -148,29 +190,13 @@ public class CustomerFormController {
                 txtName.setText(customerDto.getName());
                 txtAddress.setText(customerDto.getAddress());
                 txtTele.setText(customerDto.getTele());
+                txtEmail.setText(customerDto.getEmail());
             } else {
                 new Alert(Alert.AlertType.INFORMATION, "customer not found").show();
             }
         } catch (SQLException e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, e.getMessage()).show();
-        }
-    }
-
-
-    public void cmbLoadCustomerIds(ActionEvent event) throws Exception {
-        ObservableList<String> obList = FXCollections.observableArrayList();
-
-        try {
-            List<CustomerDto> idList = cusModel.loadAllCustomerIds();
-
-            for (CustomerDto dto : idList) {
-                obList.add(dto.getId());
-            }
-
-            cmbCustomersIds.setItems(obList);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 }

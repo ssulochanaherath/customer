@@ -1,8 +1,6 @@
 package lk.ijse.customer.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DbConnection {
     private static DbConnection dbConnection;
@@ -23,5 +21,21 @@ public class DbConnection {
 
     public Connection getConnection() {
         return connection;
+    }
+
+    public void closeConnections(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Handle or log the exception as needed
+        }
     }
 }

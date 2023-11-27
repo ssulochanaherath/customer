@@ -5,11 +5,12 @@ public class CustomerTm {
     private String name;
     private String address;
     private String tele;
+    private String email;
 
     public CustomerTm() {
     }
 
-    public CustomerTm(String id, String name, String address, String tele) {
+    public CustomerTm(String id, String name, String address, String tele, String email) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -48,6 +49,14 @@ public class CustomerTm {
         this.tele = tele;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "CustomerTm{" +
@@ -55,6 +64,7 @@ public class CustomerTm {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", tele='" + tele + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

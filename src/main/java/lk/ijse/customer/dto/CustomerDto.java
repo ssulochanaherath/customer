@@ -4,15 +4,17 @@ package lk.ijse.customer.dto;
         private String name;
         private String address;
         private String tele;
+        private String email;
 
         public CustomerDto() {
         }
 
-        public CustomerDto(String id, String name, String address, String tele) {
+        public CustomerDto(String id, String name, String address, String tele, String email) {
             this.id = id;
             this.name = name;
             this.address = address;
             this.tele = tele;
+            this.email = email;
         }
 
         public String getId() {
@@ -47,6 +49,14 @@ package lk.ijse.customer.dto;
             this.tele = tele;
         }
 
+        public String getEmail() {
+            return email;
+        }
+
+        public void setEmail(String email) {
+            this.email = email;
+        }
+
         @Override
         public String toString() {
             return "CustomerDto{" +
@@ -54,6 +64,7 @@ package lk.ijse.customer.dto;
                     ", name='" + name + '\'' +
                     ", address='" + address + '\'' +
                     ", tele='" + tele + '\'' +
+                    ", email='" + email + '\'' +
                     '}';
         }
     }
